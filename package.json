@@ -11,12 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@elastic/elasticsearch": "^7.9.1",
     "agentkeepalive": "^4.0.2",
     "axios": "^0.19.2",
-    "elasticsearch": "^16.7.1",
     "express": "^4.17.1",
-    "express-form-data": "^2.0.10",
+    "express-form-data": "^2.0.14",
     "get-json": "^1.0.1",
     "log-timestamp": "^0.3.0",
     "nodemon": "^1.19.2",

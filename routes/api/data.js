@@ -1,11 +1,11 @@
 'use strict'
 
 require('log-timestamp');
-const config = require('../../config');
 const express = require('express');
 const router = express.Router();
 const axios = require('axios')
-//const client = require(config.elasticsearch_path_client);
+
+
 const URL = `https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson`;
 
 //================== Official API Call ==================\\
@@ -15,20 +15,6 @@ router.get('/earthquakes', async function (req, res) {
     var earthquakeObject = null
     
     //res.json('Running Application...')
-
-    //setInterval(() => { 
-        //======= Check that Elasticsearch is up and running =======\\
-        // pingElasticsearch = async () => {
-        //     await client.ping(
-        //         function(error,res) {
-        //             if (error) {
-        //                 console.error('elasticsearch cluster is down!');
-        //             } else {
-        //                 console.log('Elasticsearch Ready');
-        //             }
-        //         }
-        //     );
-        // }
 
     // ====== Get Data From USGS and then index into Elasticsearch
     const indexAllDocs = async () => {
@@ -84,13 +70,6 @@ router.get('/earthquakes', async function (req, res) {
                         },
                     depth: results.geometry.coordinates[2]
                 }
-                // ,await client.index({ 
-                //     index: 'earthquakes',
-                //     id: results.id,
-                //     body: earthquakeObject
-                // }), (err, resp, status) => {
-                //     console.log(resp);
-                // }
             ));
             
             if (EARTHQUAKES.data.length) {
@@ -107,10 +86,8 @@ router.get('/earthquakes', async function (req, res) {
 
         console.log('Preparing For The Next Data Check...');
     }
-
-    //pingElasticsearch()
+   
     indexAllDocs()
-    //}, 120000);
 });
  
 module.exports = router;
